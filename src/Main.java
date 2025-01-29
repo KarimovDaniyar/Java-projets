@@ -1,38 +1,57 @@
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Random;
+import java.sql.SQLOutput;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(getInfoIarr(15));
-        System.out.println(isPolindrom(121));
-    }
-    public static String getInfoIarr(int l){
-        Random random = new Random();
-        float sumOfIarr = 0;
-        int[] iarr = new int[l];
-        for(int i = 0; i<iarr.length; i++){
-            iarr[i] = random.nextInt(101);
-            sumOfIarr+=iarr[i];
-        }
-        int varForMax = iarr[0];
-        int varForMin = iarr[0];
-        for (int j : iarr) {
-            if (varForMax < j) {
-                varForMax = j;
+        Scanner scanner = new Scanner(System.in);
+        boolean cont = true;
+        while(cont){
+            System.out.println("first number: ");
+            int n1 = scanner.nextInt();
+            System.out.println("second number: ");
+            int n2 = scanner.nextInt();
+            System.out.println("choose (+, -, *, /): ");
+            String action = scanner.next();
+            double result = 0;
+            boolean valid = true;
+
+            switch (action) {
+                case "+":
+                   result = n1 + n2;
+                    break;
+                case "-":
+                   result = n1 - n2;
+                    break;
+                case "*":
+                    result = n1 * n2;
+                    break;
+                case "/":
+                    if (n2 != 0) {
+                       result = n1 / n2;
+                    } else {
+                        System.out.println("Error: division by zero");
+                        valid = false;
+                    }
+                    break;
+                default:
+                    System.out.println("please write correct action");
+                    valid = false;
             }
-            if (varForMin > j) {
-                varForMin = j;
+            if (valid){
+                System.out.println(result);
+            }
+            System.out.println("continue ? ");
+            String answer = scanner.nextLine();
+
+            if (answer.equalsIgnoreCase("no")){
+                cont = false;
+                System.out.println("Good bye");
+            }if (answer.equalsIgnoreCase("yes")){
+                cont = true;
             }
         }
-        return "Array " + Arrays.toString(iarr) + ", Sum " + sumOfIarr + ", Avg " + sumOfIarr/ iarr.length + ", Max " + varForMax + ", Min " + varForMin;
-    }
-    public static Boolean isPolindrom(Object var){
-        String str = var.toString();
-        String reversStr = "";
-        for(int i = str.length()-1; i>=0; i--){
-            reversStr += str.charAt(i);
-        }
-        return str.equals(reversStr);
+        scanner.close();
     }
 }
+
+
