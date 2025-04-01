@@ -12,3 +12,37 @@ public class Generics {
         System.out.println(t + "???");
     }
 }
+
+class Car {
+    private String model;
+    private int year;
+
+    public Car(String model, int year) {
+        this.model = model;
+        this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "model='" + model + '\'' +
+                ", year=" + year +
+                '}';
+    }
+}
+
+class Example<T, V> {
+    private String string = "";
+
+    public String getString(){
+        return string;
+    }
+
+    public void addToString(T t, V v){
+        if(this.string.equals("")){
+            this.string += t.toString() +" - "+ v.toString();
+        }else{
+            this.string += " - " + t.toString() + " - " + v.toString();
+        }
+    }
+}
